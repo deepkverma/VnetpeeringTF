@@ -1,21 +1,21 @@
 
 # Network interface of VM
-resource "azurerm_network_interface" "myvm1nic"   { 
-   name                    =   "myvm1-nic" 
+resource "azurerm_network_interface" "myvm2nic"   { 
+   name                    =   "myvm2-nic" 
    location                =   "eastus" 
    resource_group_name     =    var.resource_group_name 
 
    ip_configuration   { 
      name                            =   "ipconfig1" 
-     subnet_id                       =    var.subnetid
+     subnet_id                       =    var.subnet2id
      private_ip_address_allocation   =   "Dynamic" 
-     public_ip_address_id            =   azurerm_public_ip.myvm1publicip.id 
+     public_ip_address_id            =   azurerm_public_ip.myvm2publicip.id 
    } 
  }
 
 # Public IP for VM
-resource   "azurerm_public_ip"   "myvm1publicip"   { 
-   name                   =   "pip1" 
+resource   "azurerm_public_ip"   "myvm2publicip"   { 
+   name                   =   "pip2" 
    location               =   "eastus" 
    resource_group_name    =   var.resource_group_name 
    allocation_method      =   "Dynamic" 
@@ -24,11 +24,11 @@ resource   "azurerm_public_ip"   "myvm1publicip"   {
 
 # The VM
 
-resource   "azurerm_windows_virtual_machine"  "vm"   { 
-   name                    =   "myvm1"   
+resource   "azurerm_windows_virtual_machine"  "vm2"   { 
+   name                    =   "myvm2"   
    location                =   "eastus" 
    resource_group_name     =   var.resource_group_name 
-   network_interface_ids   =   [ azurerm_network_interface.myvm1nic.id ] 
+   network_interface_ids   =   [ azurerm_network_interface.myvm2nic.id ] 
    size                    =   "Standard_B1s" 
    admin_username          =   "adminuser" 
    admin_password          =   "Password123!" 

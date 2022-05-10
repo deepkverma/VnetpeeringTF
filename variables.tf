@@ -40,3 +40,4 @@ variable "subnet_address_prefix2" {
     type = list(string)
     description = "address prefix of the subnet"
 }
+
